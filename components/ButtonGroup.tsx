@@ -15,7 +15,7 @@ const ButtonGroup = () => {
           style={styles.linearGradient}
         >
           <TabBarIcon name="calendar" size={30} />
-          <Text style={styles.text}>Calendario</Text>
+          <Text style={styles.text}>Reservas</Text>
         </LinearGradient>
       </TouchableOpacity>
       <TouchableOpacity style={[styles.button]} onPress={() => console.log('Botón 2 presionado')}>
@@ -37,7 +37,7 @@ const ButtonGroup = () => {
           style={styles.linearGradient}
         >
           <TabBarIcon name="location" size={30} />
-          <Text style={styles.text}>Lugares</Text>
+          <Text style={styles.text}>Rutas</Text>
         </LinearGradient>
       </TouchableOpacity>
     </ThemedView>
@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
   },
   text: {
     color: '#000',
-    fontSize: 10,
+    fontSize: 11,
     fontWeight: 'bold',
     paddingTop: 8,
   },

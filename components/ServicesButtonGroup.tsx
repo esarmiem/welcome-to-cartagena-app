@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
   },
   overlay: {
     ...StyleSheet.absoluteFillObject, // Cubre toda la imagen
-    backgroundColor: 'rgba(0, 0, 0, 0.4)', // Color negro con 50% de opacidad
+    backgroundColor: 'rgba(0, 0, 0, 0.3)', // Color negro con 30% de opacidad
   },
   text: {
     color: '#fff',

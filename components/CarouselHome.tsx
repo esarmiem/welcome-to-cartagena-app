@@ -20,6 +20,7 @@ const CarouselHome = () => {
     localImg={true}
     showHeader={false}
     showIndicator={true}
+    headerStyle = {{ display: 'none' }}
     activeIndicatorStyle={{ backgroundColor: '#fff'}}
     indicatorContainerStyle={{ alignItems: 'baseline' }}
   />
