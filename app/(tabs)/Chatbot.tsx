@@ -37,7 +37,7 @@ export const Chatbot = () => {
     setPendingMessage("");
 
     try {
-      const response = await fetch("http://192.168.116.1:8080/ask_pdf", {
+      const response = await fetch("http://192.168.1.5:8080/ask_pdf", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -119,8 +119,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "flex-start",
-    margin: 10,
+    margin: 0,
     paddingTop: 40,
+    backgroundColor: "#fff",
   },
   messageContainer: {
     width: "100%",
