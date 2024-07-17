@@ -44,6 +44,15 @@ export default function TabLayout() {
           ),
         }}
       />
+            <Tabs.Screen
+        name="Chatbot2"
+        options={{
+          title: 'Chatbot2',
+          tabBarIcon: ({ color, focused }) => (
+            <TabBarIcon name={focused ? 'chatbox-ellipses' : 'chatbox'} color={color} />
+          ),
+        }}
+      />
     </Tabs>
   );
 }

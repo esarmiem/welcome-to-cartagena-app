@@ -21,6 +21,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 8,
+    backgroundColor: '#f0f0f0',
   },
   Search: {
     backgroundColor: '#fff',
