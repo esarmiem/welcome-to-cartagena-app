@@ -1,31 +1,22 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import {
+  SafeAreaView,
   StyleSheet,
+  TextInput,
+  Text,
+  View,
   ScrollView,
   TouchableOpacity,
-  useColorScheme,
 } from "react-native";
-import {
-  ThemeProvider,
-  DarkTheme,
-  DefaultTheme,
-  useTheme,
-} from "@react-navigation/native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { ThemedView } from "@/components/ThemedView";
-import { ThemedText } from "@/components/ThemedText";
-import { ThemedTextInput } from "@/components/ThemedTextInput";
+
 
 interface Message {
-  type: "sent" | "received";
+  type: 'sent' | 'received';
   text: string;
 }
 
 export const Chatbot = () => {
-  const colorScheme = useColorScheme();
-  const theme = colorScheme === "dark" ? DarkTheme : DefaultTheme;
-  
   const [messages, setMessages] = useState<Message[]>([]);
   const [pendingMessage, setPendingMessage] = useState<string>("");
   const [typingMessage, setTypingMessage] = useState<string>("");
@@ -34,17 +25,19 @@ export const Chatbot = () => {
   const handleSubmit = async () => {
     if (!pendingMessage.trim()) return;
 
+    // Agrega el mensaje pendiente al estado inmediatamente
     setMessages((prevMessages) => [
       ...prevMessages,
-      { type: "sent", text: pendingMessage },
+      { type: 'sent', text: pendingMessage }
     ]);
 
     const requestBody = { query: pendingMessage };
 
+    // Limpia el mensaje pendiente del input
     setPendingMessage("");
 
     try {
-      const response = await fetch("http://192.168.1.7:8080/ask_pdf", {
+      const response = await fetch("http://192.168.1.5:8080/ask_pdf", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -76,11 +69,11 @@ export const Chatbot = () => {
         clearInterval(interval);
         setMessages((prevMessages) => [
           ...prevMessages,
-          { type: "received", text: text },
+          { type: 'received', text: text }
         ]);
-        setTypingMessage("");
+        setTypingMessage(""); // Clear typing message after complete
       }
-    }, 50);
+    }, 50); // Adjust the speed here (faster)
   };
 
   useEffect(() => {
@@ -88,60 +81,52 @@ export const Chatbot = () => {
   }, [messages, typingMessage]);
 
   return (
-    <ThemeProvider value={theme}>
-      <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
-        <ScrollView
-          style={styles.messageContainer}
-          ref={scrollViewRef}
-          onContentSizeChange={() =>
-            scrollViewRef.current?.scrollToEnd({ animated: true })
-          }
-        >
-          {messages.map((msg, index) => (
-            <ThemedText
-              key={index}
-              style={[
-                styles.message,
-                msg.type === "sent" ? styles.sent : styles.received,
-              ]}
-            >
-              {msg.text}
-            </ThemedText>
-          ))}
-          {typingMessage && (
-            <ThemedText style={[styles.message, styles.received,]}>
-              {typingMessage}
-            </ThemedText>
-          )}
-        </ScrollView>
-        <ThemedView style={[styles.inputContainer, { backgroundColor: theme.colors.background }]}>
-          <ThemedTextInput
-            style={styles.input}
-            placeholder="Pregunta a tu asistente virtual..."
-            onChangeText={(text) => setPendingMessage(text)}
-            value={pendingMessage}
-          />
-          <TouchableOpacity onPress={handleSubmit}>
-            <Ionicons name="arrow-up-circle" size={40} color="#fe961b" />
-          </TouchableOpacity>
-        </ThemedView>
-      </SafeAreaView>
-    </ThemeProvider>
+    <SafeAreaView style={styles.container}>
+      <ScrollView
+        style={styles.messageContainer}
+        ref={scrollViewRef}
+        onContentSizeChange={() => scrollViewRef.current?.scrollToEnd({ animated: true })}
+      >
+        {messages.map((msg, index) => (
+          <Text key={index} style={[styles.message, msg.type === 'sent' ? styles.sent : styles.received]}>
+            {msg.text}
+          </Text>
+        ))}
+        {typingMessage && (
+          <Text style={[styles.message, styles.received]}>
+            {typingMessage}
+          </Text>
+        )}
+      </ScrollView>
+      <View style={styles.inputContainer}>
+        <TextInput
+          style={styles.input}
+          placeholder="Pregunta a tu asistente virtual..."
+          onChangeText={(text) => setPendingMessage(text)}
+          value={pendingMessage}
+        />
+        <TouchableOpacity onPress={handleSubmit}>
+          <Ionicons name="arrow-up-circle" size={40} color="#fe961b" />
+        </TouchableOpacity>
+      </View>
+    </SafeAreaView>
   );
 };
+
+export default Chatbot;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "flex-start",
     margin: 0,
-    paddingTop: 20,
+    paddingTop: 40,
+    backgroundColor: "#fff",
   },
   messageContainer: {
     width: "100%",
     flexGrow: 1,
     marginBottom: 10,
-    paddingHorizontal: 12,
   },
   message: {
     margin: 5,
@@ -155,6 +140,7 @@ const styles = StyleSheet.create({
   },
   received: {
     alignSelf: "flex-start",
+    backgroundColor: "#f0f0f0",
   },
   inputContainer: {
     width: "100%",
@@ -169,5 +155,3 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
 });
-
-export default Chatbot;

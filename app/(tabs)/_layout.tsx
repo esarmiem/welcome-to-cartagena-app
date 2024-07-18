@@ -36,20 +36,20 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="Chatbot"
+        name="chatbot"
         options={{
-          title: 'Chatbot',
+          title: 'chatbot',
           tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'chatbubble-ellipses' : 'chatbubble'} color={color} />
+            <TabBarIcon name={focused ? 'chatbox-ellipses' : 'chatbox'} color={color} />
           ),
         }}
       />
-            <Tabs.Screen
-        name="Chatbot2"
+      <Tabs.Screen
+        name="profile"
         options={{
-          title: 'Chatbot2',
+          title: 'Perfil',
           tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'chatbox-ellipses' : 'chatbox'} color={color} />
+            <TabBarIcon name={focused ? 'person' : 'person'} color={color} />
           ),
         }}
       />
