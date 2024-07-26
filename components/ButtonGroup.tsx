@@ -3,8 +3,10 @@ import { TouchableOpacity, StyleSheet, Text } from 'react-native';
 import { ThemedView } from '@/components/ThemedView';
 import { TabBarIcon } from '@/components/navigation/TabBarIcon';
 import { LinearGradient } from 'expo-linear-gradient';
+import { useRouter } from 'expo-router';
 
 const ButtonGroup = () => {
+  const router = useRouter();
   return (
     <ThemedView style={styles.container}>
       <TouchableOpacity style={[styles.button]} onPress={() => console.log('Botón 1 presionado')}>
@@ -18,7 +20,7 @@ const ButtonGroup = () => {
           <Text style={styles.text}>Reservas</Text>
         </LinearGradient>
       </TouchableOpacity>
-      <TouchableOpacity style={[styles.button]} onPress={() => console.log('Botón 2 presionado')}>
+      <TouchableOpacity style={[styles.button]} onPress={() => router.push('/scanner')}>
         <LinearGradient
           colors={['#fe961b', '#fed603']}
           start={{ x: 0, y: 1 }}
