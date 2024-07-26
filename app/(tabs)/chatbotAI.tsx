@@ -22,7 +22,7 @@ interface Message {
   text: string;
 }
 
-export const Chatbot = () => {
+export const chatbot = () => {
   const colorScheme = useColorScheme();
   const theme = colorScheme === "dark" ? DarkTheme : DefaultTheme;
   
@@ -163,7 +163,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     paddingLeft: 24,
   },
-  input: {
+  input: { //corregir el textinput en ios al abrir el teclado, debe quedar arriba y se esconde :(
     width: "85%",
     borderWidth: 1,
     padding: 10,
@@ -171,4 +171,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Chatbot;
+export default chatbot;
