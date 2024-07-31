@@ -5,6 +5,9 @@ import {
   ScrollView,
   TouchableOpacity,
   useColorScheme,
+  KeyboardAvoidingView, 
+  Platform,
+  Keyboard
 } from "react-native";
 import {
   ThemeProvider,
@@ -29,7 +32,24 @@ export const chatbot = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [pendingMessage, setPendingMessage] = useState<string>("");
   const [typingMessage, setTypingMessage] = useState<string>("");
+  const [keyboardOffset, setKeyboardOffset] = useState(0);
   const scrollViewRef = useRef<ScrollView>(null);
+
+  useEffect(() => {
+    const keyboardWillShowListener = Keyboard.addListener(
+      'keyboardWillShow',
+      () => setKeyboardOffset(90)
+    );
+    const keyboardWillHideListener = Keyboard.addListener(
+      'keyboardWillHide',
+      () => setKeyboardOffset(0)
+    );
+
+    return () => {
+      keyboardWillShowListener.remove();
+      keyboardWillHideListener.remove();
+    };
+  }, []);
 
   const handleSubmit = async () => {
     if (!pendingMessage.trim()) return;
@@ -109,25 +129,32 @@ export const chatbot = () => {
             </ThemedText>
           ))}
           {typingMessage && (
-            <ThemedText style={[styles.message, styles.received,]}>
+            <ThemedText style={[styles.message, styles.received]}>
               {typingMessage}
             </ThemedText>
           )}
         </ScrollView>
-        <ThemedView style={[styles.inputContainer, { backgroundColor: theme.colors.background }]}>
-          <ThemedTextInput
-            style={styles.input}
-            placeholder="Pregunta a tu asistente virtual..."
-            onChangeText={(text) => setPendingMessage(text)}
-            value={pendingMessage}
-          />
-          <TouchableOpacity onPress={handleSubmit}>
-            <Ionicons name="arrow-up-circle" size={40} color="#fe961b" />
-          </TouchableOpacity>
-        </ThemedView>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+          style={styles.keyboardAvoidingView}
+          keyboardVerticalOffset={keyboardOffset}
+        >
+          <ThemedView style={[styles.inputContainer, { backgroundColor: theme.colors.background }]}>
+            <ThemedTextInput
+              style={styles.input}
+              placeholder="Pregunta a tu asistente virtual..."
+              onChangeText={(text) => setPendingMessage(text)}
+              value={pendingMessage}
+            />
+            <TouchableOpacity onPress={handleSubmit}>
+              <Ionicons name="arrow-up-circle" size={40} color="#fe961b" />
+            </TouchableOpacity>
+          </ThemedView>
+        </KeyboardAvoidingView>
       </SafeAreaView>
     </ThemeProvider>
   );
+  
 };
 
 const styles = StyleSheet.create({
@@ -152,6 +179,7 @@ const styles = StyleSheet.create({
     alignSelf: "flex-end",
     backgroundColor: "#fe961b",
     color: "#fff",
+    overflow: "hidden",
   },
   received: {
     alignSelf: "flex-start",
@@ -163,11 +191,14 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     paddingLeft: 24,
   },
-  input: { //corregir el textinput en ios al abrir el teclado, debe quedar arriba y se esconde :(
+  input: {
     width: "85%",
     borderWidth: 1,
     padding: 10,
     borderRadius: 20,
+  },
+  keyboardAvoidingView: {
+    width: "100%",
   },
 });
 
