@@ -20,7 +20,7 @@ const ButtonGroup = () => {
           <Text style={styles.text}>Reservas</Text>
         </LinearGradient>
       </TouchableOpacity>
-      <TouchableOpacity style={[styles.button]} onPress={() => router.push('/scanner')}>
+      <TouchableOpacity style={[styles.button]} onPress={() => router.push('/screens/scanner')}>
         <LinearGradient
           colors={['#fe961b', '#fed603']}
           start={{ x: 0, y: 1 }}
@@ -31,7 +31,7 @@ const ButtonGroup = () => {
           <Text style={styles.text}>Lector QR</Text>
         </LinearGradient>
       </TouchableOpacity>
-      <TouchableOpacity style={[styles.button]} onPress={() => console.log('Botón 3 presionado')}>
+      <TouchableOpacity style={[styles.button]} onPress={() => router.push('/screens/mapview')}>
         <LinearGradient
           colors={['#fe961b', '#fed603']}
           start={{ x: 0, y: 1 }}
