@@ -1,8 +1,14 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react';
-import { Button, StyleSheet, Text, TouchableOpacity, View, Alert } from 'react-native';
+import { Button, StyleSheet, Text, TouchableOpacity, View, Alert, Dimensions } from 'react-native';
 import { CameraView, useCameraPermissions } from 'expo-camera';
 import * as Linking from 'expo-linking';
 import * as WebBrowser from 'expo-web-browser';
+
+const SCREEN_HEIGHT = Dimensions.get('window').height;
+const SCREEN_WIDTH = Dimensions.get('window').width;
+const scanAreaSize = SCREEN_WIDTH * 0.8; // Tamaño del área de escaneo
+const cornerSize = 20; // Tamaño de cada esquina
+const cornerThickness = 4; // Grosor de las líneas de las esquinas
 
 export default function App() {
   const [isFrontCamera, setIsFrontCamera] = useState(false);
@@ -34,7 +40,6 @@ export default function App() {
       Alert.alert('Error', 'Ocurrió un problema al procesar el código QR.');
     } finally {
       setIsWebBrowserOpen(false);
-      // Configurar un temporizador para reactivar el escáner después de 2 segundos
       scanTimeoutRef.current = setTimeout(() => {
         setIsScanning(true);
       }, 2000);
@@ -43,7 +48,6 @@ export default function App() {
 
   useEffect(() => {
     return () => {
-      // Limpiar el temporizador cuando el componente se desmonta
       if (scanTimeoutRef.current) {
         clearTimeout(scanTimeoutRef.current);
       }
@@ -73,6 +77,12 @@ export default function App() {
         }}
         onBarcodeScanned={isScanning && !isWebBrowserOpen ? handleBarCodeScanned : undefined}
       >
+        <View style={styles.scanAreaContainer}>
+          <View style={styles.cornerTopLeft} />
+          <View style={styles.cornerTopRight} />
+          <View style={styles.cornerBottomLeft} />
+          <View style={styles.cornerBottomRight} />
+        </View>
         <View style={styles.buttonContainer}>
           <TouchableOpacity style={styles.button} onPress={toggleCameraFacing}>
             <Text style={styles.text}>Cambiar Cámara</Text>
@@ -100,17 +110,63 @@ const styles = StyleSheet.create({
   camera: {
     flex: 1,
   },
+  scanAreaContainer: {
+    position: 'absolute',
+    top: (SCREEN_HEIGHT - scanAreaSize) / 2.5,
+    left: (SCREEN_WIDTH - scanAreaSize) / 2,
+    width: scanAreaSize,
+    height: scanAreaSize,
+  },
+  cornerTopLeft: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: cornerSize,
+    height: cornerSize,
+    borderTopWidth: cornerThickness,
+    borderLeftWidth: cornerThickness,
+    borderColor: 'white',
+  },
+  cornerTopRight: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    width: cornerSize,
+    height: cornerSize,
+    borderTopWidth: cornerThickness,
+    borderRightWidth: cornerThickness,
+    borderColor: 'white',
+  },
+  cornerBottomLeft: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    width: cornerSize,
+    height: cornerSize,
+    borderBottomWidth: cornerThickness,
+    borderLeftWidth: cornerThickness,
+    borderColor: 'white',
+  },
+  cornerBottomRight: {
+    position: 'absolute',
+    bottom: 0,
+    right: 0,
+    width: cornerSize,
+    height: cornerSize,
+    borderBottomWidth: cornerThickness,
+    borderRightWidth: cornerThickness,
+    borderColor: 'white',
+  },
   buttonContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    backgroundColor: 'transparent',
-    margin: 64,
+    position: 'absolute',
+    bottom: 64,
+    left: 0,
+    right: 0,
+    alignItems: 'center',
   },
   button: {
-    flex: 1,
-    alignSelf: 'flex-end',
     alignItems: 'center',
-    backgroundColor: '#007AFF',
+    backgroundColor: '#fe961b',
     paddingVertical: 15,
     paddingHorizontal: 20,
     borderRadius: 5,

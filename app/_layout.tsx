@@ -39,7 +39,23 @@ export default function RootLayout() {
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="+not-found" />
         <Stack.Screen
-          name="scanner"
+          name="screens/mapview"
+          options={{
+            headerTitle: "Mapa de Cartagena",
+            headerBackTitle: "Volver",
+            headerBackTitleVisible: false,
+            headerStyle: {
+              backgroundColor: colors.background,
+            },
+            headerTintColor: colors.text,
+            headerTitleStyle: {
+              fontWeight: "bold",
+              color: colors.text,
+            },
+          }}
+        />
+        <Stack.Screen
+          name="screens/scanner"
           options={{
             headerTitle: "Escanear QR",
             headerBackTitle: "Volver",
