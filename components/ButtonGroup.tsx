@@ -16,8 +16,8 @@ const ButtonGroup = () => {
           end={{ x: 0, y: 0 }}
           style={styles.linearGradient}
         >
-          <TabBarIcon name="calendar" size={30} />
-          <Text style={styles.text}>Reservas</Text>
+          <TabBarIcon name="cash" size={30} />
+          <Text style={styles.text}>Precios</Text>
         </LinearGradient>
       </TouchableOpacity>
       <TouchableOpacity style={[styles.button]} onPress={() => router.push('/screens/scanner')}>
@@ -38,8 +38,8 @@ const ButtonGroup = () => {
           end={{ x: 0, y: 0 }}
           style={styles.linearGradient}
         >
-          <TabBarIcon name="location" size={30} />
-          <Text style={styles.text}>Rutas</Text>
+          <TabBarIcon name="map" size={30} />
+          <Text style={styles.text}>Mapa</Text>
         </LinearGradient>
       </TouchableOpacity>
     </ThemedView>
