@@ -10,15 +10,15 @@ export default function HomeScreen() {
       headerBackgroundColor={{ light: "#fe961b", dark: "#fe961b" }}
       headerImage={
         <Image
-          source={require("@/assets/images/profile.jpeg")}
+          source={require("@/assets/images/profile.jpg")}
           style={styles.profilePic}
         />
       }
     >
       <ThemedView style={styles.ProfileText}>
-        <ThemedText type="title">Elder Sarmiento</ThemedText>
+        <ThemedText type="title">Jhon Doe</ThemedText>
         <ThemedText type="defaultSemiBold">
-          @eldersarmiento • Colombia 🇨🇴
+          @jhon_doe • 🇺🇸
         </ThemedText>
       </ThemedView>
       <ButtonSettingGroup />
@@ -38,5 +38,6 @@ const styles = StyleSheet.create({
   },
   ProfileText: {
     alignSelf: "center",
+    textAlign: "center",
   },
 });
