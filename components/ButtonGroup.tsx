@@ -9,7 +9,7 @@ const ButtonGroup = () => {
   const router = useRouter();
   return (
     <ThemedView style={styles.container}>
-      <TouchableOpacity style={[styles.button]} onPress={() => console.log('Botón 1 presionado')}>
+      <TouchableOpacity style={[styles.button]} onPress={() => router.push('/screens/prices')}>
         <LinearGradient
           colors={['#fe961b', '#fed603']}
           start={{ x: 0, y: 1 }}

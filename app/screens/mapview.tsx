@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import MapView, { Marker, Callout, PROVIDER_GOOGLE, Region } from 'react-native-maps';
+import { MapView, Marker, Callout, Region } from '../../utils/map';
 
 type MarkerType = 'beach' | 'historical';
 
