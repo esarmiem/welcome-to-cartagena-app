@@ -7,11 +7,6 @@
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
-    "expo-camera": {
-      "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera.",
-      "microphonePermission": "Allow $(PRODUCT_NAME) to access your microphone.",
-      "recordAudioAndroid": true
-    },
     "splash": {
       "image": "./assets/images/splash.png",
       "resizeMode": "cover",
@@ -34,7 +29,15 @@
     },
     "plugins": [
       "expo-router",
-      "expo-font"
+      "expo-font",
+      [  // ✅ Configuración correcta de expo-camera
+        "expo-camera",
+        {
+          "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera.",
+          "microphonePermission": "Allow $(PRODUCT_NAME) to access your microphone.",
+          "recordAudioAndroid": true
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true

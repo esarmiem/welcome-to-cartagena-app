@@ -82,8 +82,8 @@ const ButtonSettingGroup = () => {
         >
           <View style={styles.contentContainer}>
             <View style={styles.leftContent}>
-              <TabBarIcon name="moon" size={20} />
-              <Text style={styles.text}>Modo Oscuro</Text>
+              <TabBarIcon name="contrast" size={20} />
+              <Text style={styles.text}>Cambiar tema</Text>
             </View>
             <Switch
               trackColor={{ false: "#F6F2FA", true: "#fed603" }}
