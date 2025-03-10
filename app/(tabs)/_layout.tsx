@@ -13,7 +13,7 @@ export default function TabLayout() {
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
         headerShown: false,
-        tabBarStyle: { width: '90%', alignSelf: 'center', justifyContent: 'center', marginTop: 5, paddingBottom: 5, marginBottom: 5, borderRadius: 20, backgroundColor: Colors[colorScheme ?? 'light'].background },
+        tabBarStyle: { width: '100%', alignSelf: 'center', justifyContent: 'center', marginTop:0, paddingBottom: 4, marginBottom:0, borderRadius: 0, backgroundColor: Colors[colorScheme ?? 'light'].background },
         tabBarShowLabel: false,
         tabBarHideOnKeyboard: true,
       }}>
@@ -36,7 +36,7 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="chatbot"
+        name="chatbotAI"
         options={{
           title: 'chatbot',
           tabBarIcon: ({ color, focused }) => (

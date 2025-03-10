@@ -4,7 +4,6 @@ import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import  ButtonGroup  from '@/components/ButtonGroup';
-import CarouselHome from '@/components/CarouselHome';
 import ServicesButtonGroup from '@/components/ServicesButtonGroup';
 import CarouselNative from '@/components/CarouselNative';
 
